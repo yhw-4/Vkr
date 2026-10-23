@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Private Phone</title>
+
+<style>
+
+* { box-sizing: border-box; }
+
+body {
+
+  margin: 0;
+
+  background: #e8e5e1;
+
+  color: #292725;
+
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+.phone {
+
+  max-width: 420px;
+
+  min-height: 100vh;
+
+  margin: auto;
+
+  background: #faf8f5;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+header {
+
+  padding: 22px;
+
+  background: #292725;
+
+  color: white;
+
+}
+
+.small { font-size: 12px; opacity: .7; }
+
+h1 { font-size: 24px; margin: 8px 0; }
+
+main { padding: 20px; }
+
+.hero {
+
+  background: #d8d0c7;
+
+  border-radius: 18px;
+
+  padding: 24px 20px;
+
+  margin-bottom: 18px;
+
+}
+
+.avatar {
+
+  width: 90px;
+
+  height: 90px;
+
+  border-radius: 50%;
+
+  background: #a79a8b;
+
+  display: grid;
+
+  place-items: center;
+
+  font-size: 42px;
+
+  margin-bottom: 16px;
+
+}
+
+button {
+
+  border: 0;
+
+  border-radius: 12px;
+
+  padding: 13px 16px;
+
+  background: #38332f;
+
+  color: white;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+}
+
+button.secondary {
+
+  background: #e9e3dc;
+
+  color: #38332f;
+
+}
+
+.buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.card {
+
+  background: white;
+
+  border: 1px solid #e8e1da;
+
+  border-radius: 14px;
+
+  padding: 16px;
+
+  margin: 12px 0;
+
+}
+
+.hidden { display: none; }
+
+.chatbox {
+
+  height: 48vh;
+
+  min-height: 280px;
+
+  overflow-y: auto;
+
+  padding: 12px;
+
+  background: #f0ede8;
+
+  border-radius: 14px;
+
+  margin: 12px 0;
+
+}
+
+.message {
+
+  max-width: 85%;
+
+  padding: 11px 13px;
+
+  border-radius: 14px;
+
+  margin: 9px 0;
+
+  line-height: 1.5;
+
+  font-size: 14px;
+
+  white-space: pre-wrap;
+
+}
+
+.them { background: white; }
+
+.me { background: #d9cbbd; margin-left: auto; }
+
+input {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid #ddd3c9;
+
+  border-radius: 12px;
+
+  font-size: 15px;
+
+  margin-bottom: 9px;
+
+}
+
+footer {
+
+  padding: 15px;
+
+  text-align: center;
+
+  color: #81766c;
+
+  font-size: 12px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="phone">
+
+  <header>
+
+    <div class="small">PRIVATE DEVICE · 09:41</div>
+
+    <h1 id="topTitle">My Phone</h1>
+
+    <div class="small">A little world between us.</div>
+
+  </header>
+
+  <main>
+
+    <section id="home">
+
+      <div class="hero">
+
+        <div class="avatar">✦</div>
+
+        <div class="small">NOW AVAILABLE</div>
+
+        <h2 id="characterName">Leon</h2>
+
+        <p id="status">Online · Not busy</p>
+
+        <div class="buttons">
+
+          <button onclick="openChat()">메시지 보내기</button>
+
+          <button class="secondary" onclick="showProfile()">프로필</button>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="small">RECENT ACTIVITY</div>
+
+        <p>✉️　새로운 대화를 시작해 보세요.</p>
+
+        <p>◷　통화 기록: 아직 없음</p>
+
+      </div>
+
+    </section>
+
+    <section id="profile" class="hidden">
+
+      <button class="secondary" onclick="goHome()">← 돌아가기</button>
+
+      <div class="card">
+
+        <div class="avatar">✦</div>
+
+        <h2 id="profileName">Leon</h2>
+
+        <p id="bio">말수가 적고 속을 알기 어려운 사람.</p>
+
+        <p class="small">STATUS: ONLINE</p>
+
+      </div>
+
+    </section>
+
+    <section id="chat" class="hidden">
+
+      <button class="secondary" onclick="goHome()">← 홈</button>
+
+      <h2 id="chatTitle">Leon과의 대화</h2>
+
+      <div id="chatbox" class="chatbox">
+
+        <div class="message them">이제야 연락했네.</div>
+
+      </div>
+
+      <div id="choices" class="buttons">
+
+        <button onclick="reply('미안, 조금 바빴어.')">미안, 조금 바빴어.</button>
+
+        <button class="secondary" onclick="reply('기다리고 있었어?')">기다리고 있었어?</button>
+
+        <button class="secondary" onclick="reply('무슨 일 있어?')">무슨 일 있어?</button>
+
+      </div>
+
+      <div style="margin-top:16px">
+
+        <input id="customMessage" placeholder="메시지 입력..." />
+
+        <button onclick="sendMessage()">보내기</button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>PRIVATE PHONE · YOUR STORY</footer>
+
+</div>
+
+<script>
+
+const CHARACTER = {
+
+  name: "Leon",
+
+  status: "Online · Not busy",
+
+  bio: "말수가 적고 속을 알기 어려운 사람."
+
+};
+
+document.getElementById("characterName").textContent = CHARACTER.name;
+
+document.getElementById("profileName").textContent = CHARACTER.name;
+
+document.getElementById("chatTitle").textContent =
+
+  CHARACTER.name + "과의 대화";
+
+document.getElementById("status").textContent = CHARACTER.status;
+
+document.getElementById("bio").textContent = CHARACTER.bio;
+
+document.title = CHARACTER.name + " · Private Phone";
+
+function hideScreens() {
+
+  ["home", "profile", "chat"].forEach(id =>
+
+    document.getElementById(id).classList.add("hidden")
+
+  );
+
+}
+
+function goHome() {
+
+  hideScreens();
+
+  document.getElementById("home").classList.remove("hidden");
+
+  document.getElementById("topTitle").textContent = "My Phone";
+
+}
+
+function showProfile() {
+
+  hideScreens();
+
+  document.getElementById("profile").classList.remove("hidden");
+
+  document.getElementById("topTitle").textContent = "Profile";
+
+}
+
+function openChat() {
+
+  hideScreens();
+
+  document.getElementById("chat").classList.remove("hidden");
+
+  document.getElementById("topTitle").textContent = "Messages";
+
+}
+
+function addMessage(text, who) {
+
+  const box = document.getElementById("chatbox");
+
+  const message = document.createElement("div");
+
+  message.className = "message " + who;
+
+  message.textContent = text;
+
+  box.appendChild(message);
+
+  box.scrollTop = box.scrollHeight;
+
+}
+
+function reply(text) {
+
+  addMessage(text, "me");
+
+  const responses = [
+
+    "그렇구나. 그래도 연락은 해 주지.",
+
+    "기다렸다고 하면 믿어 줄 건가?",
+
+    "아니. 그냥 네 목소리가 궁금했어.",
+
+    "됐어. 지금이라도 왔으니까.",
+
+    "너는 꼭 그렇게 말하더라."
+
+  ];
+
+  const answer = responses[Math.floor(Math.random() * responses.length)];
+
+  document.getElementById("choices").classList.add("hidden");
+
+  setTimeout(() => {
+
+    addMessage(answer, "them");
+
+    document.getElementById("choices").classList.remove("hidden");
+
+  }, 500);
+
+}
+
+function sendMessage() {
+
+  const input = document.getElementById("customMessage");
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  addMessage(text, "me");
+
+  input.value = "";
+
+  document.getElementById("choices").classList.add("hidden");
+
+  setTimeout(() => {
+
+    addMessage("그 말, 조금 더 자세히 들려줘.", "them");
+
+    document.getElementById("choices").classList.remove("hidden");
+
+  }, 500);
+
+}
+
+document.getElementById("customMessage").addEventListener("keydown", e => {
+
+  if (e.key === "Enter") sendMessage();
+
+});
+
+</script>
+
+</body>
+
+</html>
